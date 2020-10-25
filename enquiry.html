@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Enquiry</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+  .container{
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    height: 500px;
+    width: 1000px;
+    border-radius: 20px;
+  }
+  .modal-body{
+    background-color: blue;
+  }
+* {
+  box-sizing: border-box;
+  }
+#reg{
+  background-color: lightblue;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+  border-radius: 20px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.tab {
+  display: none;
+}
+
+button {
+  color:black;
+  background-color:purple;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.btn btn-info btn-lg{
+  width: 200px;
+  height: 200px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: pink;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: blue;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+.step.active {
+  opacity: 1;
+  background-color: red;
+}
+.step.finish {
+  background-color: green;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}
+</style>
+<body>
+<div class="container" style="align-items: center;">
+  <p style="font-size: 100px;background-color: blue;height: 120px;width:810px;color: white">ENQUIRY FORM</p>
+  <h3 style="font-size: 40px;">Please click the below button to fill the enquiry form.</h3><br><br>
+  <center><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">START</button></center>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enqiuiry form</h4>
+        </div>
+        <div class="modal-body">
+          <form id="reg" action="/action_page.php">
+    <h1><b>Enquiry form</b></h1>
+
+    <div class="tab"><h4>Name:</h4>
+      <p><input type="text" placeholder="First Name" oninput="this.classname=''" name="fname" required></p>
+      <p><input type="text" placeholder="Last Name" oninput="this.classname=''" name="lname" required></p>
+    </div>
+
+    <div class="tab"><h4>Date of Birth:</h4>
+      <input type="date" />
+    </div>
+    <div class="tab">Acheivements
+        <p><input type="text" placeholder="Write your acheivements here" oninput="this.classname=''" name="acheive" required></p>
+      </div>
+    <div class="tab"><h4>Famliy Members:</h4>
+      <form>
+    <label class="checkbox-inline">
+    <input type="checkbox" value="" oninput="this.className = ''"></label>father<br>
+    <label class="checkbox-inline">
+    <input type="checkbox" value="" oninput="this.className = ''"></label>mother<br>
+    <label class="checkbox-inline">
+    <input type="checkbox" value="" oninput="this.className = ''"></label>sister<br>
+    <label class="checkbox-inline">
+    <input type="checkbox" value="" oninput="this.className = ''"></label>brother<br><br><br>
+    <p><input placeholder="Any other??" oninput="this.className = ''" name="dd"></p>
+  </form>
+    </div>
+      <div style="overflow: auto;">
+        <div style="float: right;">
+          <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <button type="button" id="nextBtn" onclick="nextPrev(1)">Next>></button>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </form>
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>  
+</div>
+    <script>
+var currentTab = 0; 
+showTab(currentTab); 
+
+function showTab(n) {
+  
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  
+  var x = document.getElementsByClassName("tab");
+  
+  if (n == 1 && !validateForm()) return false;
+  
+  x[currentTab].style.display = "none";
+  
+  currentTab = currentTab + n;
+  
+  if (currentTab >= x.length) {
+    
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  
+  showTab(currentTab);
+}
+
+function validateForm() {
+  
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+ 
+  for (i = 0; i < y.length; i++) {
+    
+    if (y[i].value == "") {
+     
+      y[i].className += " invalid";
+      
+      valid = false;
+    }
+  }
+  
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; 
+}
+
+function fixStepIndicator(n) {
+  
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+ 
+  x[n].className += " active";
+}
+</script>
+</body>
+</html>
